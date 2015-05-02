@@ -1,9 +1,0 @@
-.\testinput.o: TestInput.c
-.\testinput.o: TestInput.h
-.\testinput.o: ADC.h
-.\testinput.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\testinput.o: Switches.h
-.\testinput.o: Constants.h
-.\testinput.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
-.\testinput.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
-.\testinput.o: random.h
