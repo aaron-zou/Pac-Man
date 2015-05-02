@@ -1,0 +1,15 @@
+.\testboard.o: TestBoard.c
+.\testboard.o: TestBoard.h
+.\testboard.o: Board.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\testboard.o: Pacman.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\testboard.o: Sprite.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\testboard.o: Constants.h
+.\testboard.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
+.\testboard.o: random.h
+.\testboard.o: Ghost.h
+.\testboard.o: UART.h

@@ -35,13 +35,13 @@ void Delay100ms(uint32_t count){uint32_t volatile time;
 // Input: fps - frame rate (frames per second)
 // Outputs: none
 void SysTick_Init(int fps) {
-  int reload = (80000000 / fps) - 1;	             // calculate reload value
-  NVIC_ST_CTRL_R = 0;         							 // disable SysTick during setup
-  NVIC_ST_RELOAD_R = reload;							    // reload value
-  NVIC_ST_CURRENT_R = 0;      							 // any write to current clears it
+  int reload = (80000000 / fps) - 1;                // calculate reload value
+  NVIC_ST_CTRL_R = 0;                               // disable SysTick during setup
+  NVIC_ST_RELOAD_R = reload;                         // reload value
+  NVIC_ST_CURRENT_R = 0;                            // any write to current clears it
   NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R & 0x00FFFFFF)  // priority 0
-							| 0x00000000; 
-  NVIC_ST_CTRL_R = 0x07;									 // enable SysTick with core clock and interrupts	
+                     | 0x00000000; 
+  NVIC_ST_CTRL_R = 0x07;                            // enable SysTick with core clock and interrupts   
 }
 
 // ***SysTick_Handler()*****
@@ -50,40 +50,40 @@ void SysTick_Init(int fps) {
 // Input: none
 // Output: none
 void SysTick_Handler(void) {
-	runGame = true;	
-	frame = (frame + 1) % fps;
+   runGame = true;   
+   frame = (frame + 1) % fps;
 }
 
 // Implements the animation cycle.
 int main(void){
-	PLL_Init();                     // 80 MHz bus frequency
-	SysTick_Init(fps);              // Initialize game's frame rate
-   // ST7735_InitR(INITR_REDTAB);	  // Initialize LCD
-	// ADC_Init();
-	Switches_Init();
-	Sound_Init();
-	Board_init(0);
-	
-	// Run test cases
-	if (debugMode) {
-		if (runAllTests()) {
-			return 0;
-		} else {
-			char* message = "Didn't pass all tests...";
-			UART_OutString(message);
-			return -1;
-		}		
-	}
-	
-	// Animation loop
-	while (true) {
-		if (runGame) {
-			FSM_getInputs();      // Read controller input and set new directions for moving objects
-			FSM_updateBoard();    // Handle collisions and set new boardPositions for moving objects
-			FSM_updateScreen();   // Draw the new state of the board
-			runGame = false;
-		}			
-	}
+   PLL_Init();                     // 80 MHz bus frequency
+   SysTick_Init(fps);              // Initialize game's frame rate
+   // ST7735_InitR(INITR_REDTAB);     // Initialize LCD
+   // ADC_Init();
+   Switches_Init();
+   Sound_Init();
+   Board_init(0);
+   
+   // Run test cases
+   if (debugMode) {
+      if (runAllTests()) {
+         return 0;
+      } else {
+         char* message = "Didn't pass all tests...";
+         UART_OutString(message);
+         return -1;
+      }      
+   }
+   
+   // Animation loop
+   while (true) {
+      if (runGame) {
+         FSM_getInputs();      // Read controller input and set new directions for moving objects
+         FSM_updateBoard();    // Handle collisions and set new boardPositions for moving objects
+         FSM_updateScreen();   // Draw the new state of the board
+         runGame = false;
+      }         
+   }
 }
 
 

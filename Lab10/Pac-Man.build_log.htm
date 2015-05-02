@@ -1,0 +1,64 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Aaron\Documents\Spring 2015\EE 319K\SVN\students\anl2357_az5385\Lab10\SpaceInvaders.uvproj
+Project File Date:  04/24/2015
+
+<h2>Output:</h2>
+Rebuild target 'Pac-Man'
+assembling startup.s...
+assembling random.s...
+compiling TExaS.c...
+compiling DAC.c...
+compiling ADC.c...
+compiling Timer0.c...
+compiling Timer1.c...
+compiling Sound.c...
+assembling LCD.s...
+assembling Print.s...
+compiling SpaceInvaders.c...
+compiling ST7735.c...
+compiling Board.c...
+Board.c(8): warning:  #177-D: variable "board" was declared but never referenced
+  static uint8_t board[ROWS][COLS];
+Board.c: 1 warning, 0 errors
+compiling Ghost.c...
+Ghost.c(16): error:  #146: too many initializer values
+        {{0, 0}, 0, 0, {}}
+Ghost.c(16): error:  #29: expected an expression
+        {{0, 0}, 0, 0, {}}
+Ghost.c(25): error:  #146: too many initializer values
+        {{0, 0}, 0, 0, {}}
+Ghost.c(25): error:  #29: expected an expression
+        {{0, 0}, 0, 0, {}}
+Ghost.c(34): error:  #146: too many initializer values
+        {{0, 0}, 0, 0, {}}
+Ghost.c(34): error:  #29: expected an expression
+        {{0, 0}, 0, 0, {}}
+Ghost.c(43): error:  #146: too many initializer values
+        {{0, 0}, 0, 0, {}}
+Ghost.c(43): error:  #29: expected an expression
+        {{0, 0}, 0, 0, {}}
+Ghost.c: 0 warnings, 8 errors
+compiling Pacman.c...
+Pacman.c(15): error:  #146: too many initializer values
+        {{0, 0}, 0, 0, {}}  // sprite
+Pacman.c(15): error:  #29: expected an expression
+        {{0, 0}, 0, 0, {}}  // sprite
+Pacman.c: 0 warnings, 2 errors
+compiling FSM.c...
+FSM.c(1): warning:  #1-D: last line of file ends without a newline
+  #include "FSM.h"
+FSM.c: 1 warning, 0 errors
+compiling Graphics.c...
+Graphics.c(1): warning:  #1-D: last line of file ends without a newline
+  #include "Graphics.h"
+Graphics.c: 1 warning, 0 errors
+compiling Switches.c...
+Switches.c(1): warning:  #1-D: last line of file ends without a newline
+  #include "Switches.h"
+Switches.c: 1 warning, 0 errors
+".\SpaceInvaders.axf" - 10 Error(s), 4 Warning(s).
+Target not created

@@ -1,0 +1,13 @@
+.\ghost.o: Ghost.c
+.\ghost.o: Ghost.h
+.\ghost.o: Pacman.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\ghost.o: Sprite.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\ghost.o: Constants.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
+.\ghost.o: random.h
+.\ghost.o: Board.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\ghost.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h

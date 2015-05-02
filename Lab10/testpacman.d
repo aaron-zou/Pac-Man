@@ -1,0 +1,10 @@
+.\testpacman.o: TestPacman.c
+.\testpacman.o: TestPacman.h
+.\testpacman.o: Pacman.h
+.\testpacman.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\testpacman.o: Sprite.h
+.\testpacman.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\testpacman.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\testpacman.o: Constants.h
+.\testpacman.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
+.\testpacman.o: random.h

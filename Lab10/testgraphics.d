@@ -1,0 +1,11 @@
+.\testgraphics.o: TestGraphics.c
+.\testgraphics.o: TestGraphics.h
+.\testgraphics.o: Graphics.h
+.\testgraphics.o: Constants.h
+.\testgraphics.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\testgraphics.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
+.\testgraphics.o: random.h
+.\testgraphics.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\testgraphics.o: Sprite.h
+.\testgraphics.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\testgraphics.o: ST7735.h

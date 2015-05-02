@@ -1,0 +1,14 @@
+.\board.o: Board.c
+.\board.o: Board.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\string.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\board.o: Pacman.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\board.o: Sprite.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\board.o: Constants.h
+.\board.o: C:\Keil\ARM\ARMCC\bin\..\include\assert.h
+.\board.o: random.h
+.\board.o: Ghost.h
+.\board.o: UART.h

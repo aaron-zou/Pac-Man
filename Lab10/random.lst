@@ -1,0 +1,249 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; Random number generator;
+    2 00000000         ; Linear congruential generator 
+    3 00000000         ; from Numerical Recipes by Press et al.
+    4 00000000         ; Jonathan Valvano
+    5 00000000         
+    6 00000000         ; How to use: 
+    7 00000000         ; 1) call Random_Init once with a seed
+    8 00000000         ;     Random_Init(1);
+    9 00000000         ;     Random_Init(NVIC_CURRENT_R);
+   10 00000000         ; 2) call Random over and over to get a new random numbe
+                       r
+   11 00000000         ;   n = Random();    // 32 bit number
+   12 00000000         ;   m = (Random()>>24)%60; // a number from 0 to 59
+   13 00000000         
+   14 00000000                 THUMB
+   15 00000000                 AREA             DATA, ALIGN=2
+   16 00000000 00 00 00 
+              00       M       SPACE            4
+   17 00000004 00000024 
+                       ROWS    EQU              36          ; double check thes
+                                                            e numbers
+   18 00000004 00000012 
+                       COLS    EQU              18
+   19 00000004                 ALIGN
+   20 00000004                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+   21 00000000         
+   22 00000000                 EXPORT           Random_Init
+   23 00000000                 EXPORT           Random
+   24 00000000                 EXPORT           Random32
+   25 00000000                 EXPORT           RandRow
+   26 00000000                 EXPORT           RandCol
+   27 00000000         
+   28 00000000         Random_Init
+   29 00000000 4A20            LDR              R2,=M       ; R4 = &M, R4 point
+                                                            s to M
+   30 00000002 F04F 0001       MOV              R0,#1       ; Initial seed
+   31 00000006 6010            STR              R0,[R2]     ; M=1
+   32 00000008 4770            BX               LR
+   33 0000000A         ;------------Random32------------
+   34 0000000A         ; Return R0= random number
+   35 0000000A         ; Linear congruential generator 
+   36 0000000A         ; from Numerical Recipes by Press et al.
+   37 0000000A 4A1E    Random32
+                               LDR              R2,=M       ; R2 = &M, R4 point
+                                                            s to M
+   38 0000000C 6810            LDR              R0,[R2]     ; R0=M
+   39 0000000E 491E            LDR              R1,=1664525
+   40 00000010 FB00 F001       MUL              R0,R0,R1    ; R0 = 1664525*M
+   41 00000014 491D            LDR              R1,=1013904223
+   42 00000016 4408            ADD              R0,R1       ; 1664525*M+1013904
+                                                            223 
+   43 00000018 6010            STR              R0,[R2]     ; store M
+   44 0000001A 4770            BX               LR
+   45 0000001C         
+   46 0000001C         ;------------Random------------
+   47 0000001C         ; Return R0= random number, 0 to 255
+   48 0000001C         ; Linear congruential generator 
+   49 0000001C         ; from Numerical Recipes by Press et al.
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   50 0000001C 4A19    Random  LDR              R2,=M       ; R2 = &M, R4 point
+                                                            s to M
+   51 0000001E 6810            LDR              R0,[R2]     ; R0=M
+   52 00000020 4919            LDR              R1,=1664525
+   53 00000022 FB00 F001       MUL              R0,R0,R1    ; R0 = 1664525*M
+   54 00000026 4919            LDR              R1,=1013904223
+   55 00000028 4408            ADD              R0,R1       ; 1664525*M+1013904
+                                                            223 
+   56 0000002A 6010            STR              R0,[R2]     ; store M
+   57 0000002C EA4F 6010       LSR              R0,R0,#24   ; top 8 bits of num
+                                                            ber
+   58 00000030 4770            BX               LR
+   59 00000032         
+   60 00000032         ;------------RandRow------------
+   61 00000032         ; Return R0= random number, 0 to ROWS - 1
+   62 00000032         ; Linear congruential generator 
+   63 00000032         ; from Numerical Recipes by Press et al.
+   64 00000032 4A14    RandRow LDR              R2,=M       ; R2 = &M, R4 point
+                                                            s to M
+   65 00000034 6810            LDR              R0,[R2]     ; R0=M
+   66 00000036 4914            LDR              R1,=1664525
+   67 00000038 FB00 F001       MUL              R0,R0,R1    ; R0 = 1664525*M
+   68 0000003C 4913            LDR              R1,=1013904223
+   69 0000003E 4408            ADD              R0,R1       ; 1664525*M+1013904
+                                                            223 
+   70 00000040 6010            STR              R0,[R2]     ; store M
+   71 00000042 EA4F 6010       LSR              R0,R0,#24   ; top 8 bits of 
+   72 00000046 F04F 0224       LDR              R2,=ROWS
+   73 0000004A 6812            LDR              R2,[R2]
+   74 0000004C FBB0 F1F2       UDIV             R1,R0,R2    ; Random32 / ROWS
+   75 00000050 FB01 F102       MUL              R1,R1,R2    ; get integer part
+   76 00000054 EBA0 0001       SUB              R0,R0,R1    ; store Random32 % 
+                                                            ROWS
+   77 00000058 4770            BX               LR
+   78 0000005A         
+   79 0000005A         ;------------RandCol------------
+   80 0000005A         ; Return R0= random number, 0 to COLS - 1
+   81 0000005A         ; Linear congruential generator 
+   82 0000005A         ; from Numerical Recipes by Press et al.
+   83 0000005A 4A0A    RandCol LDR              R2,=M       ; R2 = &M, R4 point
+                                                            s to M
+   84 0000005C 6810            LDR              R0,[R2]     ; R0=M
+   85 0000005E 490A            LDR              R1,=1664525
+   86 00000060 FB00 F001       MUL              R0,R0,R1    ; R0 = 1664525*M
+   87 00000064 4909            LDR              R1,=1013904223
+   88 00000066 4408            ADD              R0,R1       ; 1664525*M+1013904
+                                                            223 
+   89 00000068 6010            STR              R0,[R2]     ; store M
+   90 0000006A EA4F 6010       LSR              R0,R0,#24   ; top 8 bits of num
+                                                            ber
+   91 0000006E F04F 0212       LDR              R2,=COLS
+   92 00000072 6812            LDR              R2,[R2]
+   93 00000074 FBB0 F1F2       UDIV             R1,R0,R2    ; Random32 / ROWS
+   94 00000078 FB01 F102       MUL              R1,R1,R2    ; get integer part
+   95 0000007C EBA0 0001       SUB              R0,R0,R1    ; store Random32 % 
+                                                            ROWS
+   96 00000080 4770            BX               LR
+   97 00000082         
+   98 00000082 00 00           ALIGN
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   99 00000084                 END
+              00000000 
+              0019660D 
+              3C6EF35F 
+Command Line: --debug --xref --cpu=Cortex-M4 --apcs=interwork --depend=.\random
+.d -o.\random.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\AR
+M\Inc\Luminary --list=.\random.lst random.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DATA 00000000
+
+Symbol: DATA
+   Definitions
+      At line 15 in file random.s
+   Uses
+      None
+Comment: DATA unused
+M 00000000
+
+Symbol: M
+   Definitions
+      At line 16 in file random.s
+   Uses
+      At line 29 in file random.s
+      At line 37 in file random.s
+      At line 50 in file random.s
+      At line 64 in file random.s
+      At line 83 in file random.s
+
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 20 in file random.s
+   Uses
+      None
+Comment: .text unused
+RandCol 0000005A
+
+Symbol: RandCol
+   Definitions
+      At line 83 in file random.s
+   Uses
+      At line 26 in file random.s
+Comment: RandCol used once
+RandRow 00000032
+
+Symbol: RandRow
+   Definitions
+      At line 64 in file random.s
+   Uses
+      At line 25 in file random.s
+Comment: RandRow used once
+Random 0000001C
+
+Symbol: Random
+   Definitions
+      At line 50 in file random.s
+   Uses
+      At line 23 in file random.s
+Comment: Random used once
+Random32 0000000A
+
+Symbol: Random32
+   Definitions
+      At line 37 in file random.s
+   Uses
+      At line 24 in file random.s
+Comment: Random32 used once
+Random_Init 00000000
+
+Symbol: Random_Init
+   Definitions
+      At line 28 in file random.s
+   Uses
+      At line 22 in file random.s
+Comment: Random_Init used once
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+COLS 00000012
+
+Symbol: COLS
+   Definitions
+      At line 18 in file random.s
+   Uses
+      At line 91 in file random.s
+Comment: COLS used once
+ROWS 00000024
+
+Symbol: ROWS
+   Definitions
+      At line 17 in file random.s
+   Uses
+      At line 72 in file random.s
+Comment: ROWS used once
+2 symbols
+342 symbols in table

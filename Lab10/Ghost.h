@@ -7,13 +7,13 @@
 
 // Define template for ghost.
 typedef struct ghost {
-	uint8_t direction;
-	uint8_t nextDir;
-	bool changedCell;
-	uint16_t speed;
-	boardPos_t boardPos;
-	boardPos_t target;     // fixed target used when the ghosts are in "scatter" mode
-	// sprite_t sprite;
+   uint8_t direction;
+   uint8_t nextDir;
+   bool changedCell;
+   uint16_t speed;
+   boardPos_t boardPos;
+   boardPos_t target;     // fixed target used when the ghosts are in "scatter" mode
+   // sprite_t sprite;
 } ghost_t;
 
 
